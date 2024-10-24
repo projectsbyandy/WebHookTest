@@ -1,15 +1,15 @@
 using System.Net.Http.Json;
-using PlayerServices;
-using WebHookServer;
+using WebHookServerApp = WebHookServer.Program;
+using PlayerServicesApp = PlayerServices.Program;
 
 namespace IntegrationTests.Endpoints;
 
-public class PlayerManagementTests : IClassFixture<ApplicationFactoryFixture<WebHookServiceProgram>>, IClassFixture<ApplicationFactoryFixture<PlayerServicesProgram>>
+public class PlayerManagementTests : IClassFixture<ApplicationFactoryFixture<WebHookServerApp>>, IClassFixture<ApplicationFactoryFixture<PlayerServicesApp>>
 {
-    private readonly ApplicationFactoryFixture<WebHookServiceProgram> _webHookServiceFactory;
-    private readonly ApplicationFactoryFixture<PlayerServicesProgram> _playerServiceFactory;
+    private readonly ApplicationFactoryFixture<WebHookServerApp> _webHookServiceFactory;
+    private readonly ApplicationFactoryFixture<PlayerServicesApp> _playerServiceFactory;
 
-    public PlayerManagementTests(ApplicationFactoryFixture<WebHookServiceProgram> webHookServiceFactory, ApplicationFactoryFixture<PlayerServicesProgram> playerServiceFactory)
+    public PlayerManagementTests(ApplicationFactoryFixture<WebHookServerApp> webHookServiceFactory, ApplicationFactoryFixture<PlayerServicesApp> playerServiceFactory)
     {
         _webHookServiceFactory = webHookServiceFactory;
         _playerServiceFactory = playerServiceFactory;
@@ -26,7 +26,7 @@ public class PlayerManagementTests : IClassFixture<ApplicationFactoryFixture<Web
         _playerServiceFactory.CreateClient();
         
         // Act
-        var response = await webHookServiceClient.PostAsJsonAsync("/Publish", new { topic = "event.playerRegistration", message = new { user = "Andrew", userType = "Slot Machine"} });
+        var response = await webHookServiceClient.PostAsJsonAsync("/api/topic/publish", new { topic = "event.playerRegistration", message = new { user = "Andrew", userType = "Slot Machine"} });
         response.EnsureSuccessStatusCode();
         
         // Assert

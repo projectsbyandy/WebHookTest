@@ -26,7 +26,7 @@ internal class WebHookService(ILogger logger, HttpClient httpClient)
         }
     }
 
-    public async Task PublishMessageAsync(string topic, object message)
+    public async Task PublishEventAsync(string topic, object message)
     {
         var subscribedWebHooks = Subscriptions.Where(webHook => webHook.Topic.Equals(topic));
 

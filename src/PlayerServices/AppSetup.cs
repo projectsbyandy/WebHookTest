@@ -35,7 +35,7 @@ internal static class AppSetup
         }
 
         app.UseHttpsRedirection();
-        app.MapPlayerManagementEndpoint();
+        app.MapPlayerManagementEndpoints();
         
         await RegisterWebHooksAsync(app);
 

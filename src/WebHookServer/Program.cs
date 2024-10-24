@@ -1,9 +1,9 @@
-using PlayerServices;
+using WebHookServer;
 
 var app = AppSetup.ConfigureHostBuilder(args).Build();
 await AppSetup.ConfigureAppAsync(app);
 
-namespace PlayerServices
+namespace WebHookServer
 {
-    public partial class PlayerServicesProgram;
+    public partial class Program;
 }

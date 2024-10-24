@@ -5,12 +5,12 @@ namespace PlayerServices.Endpoints;
 
 internal static class PlayerManagement
 {
-    public static void MapPlayerManagementEndpoint(this IEndpointRouteBuilder app)
+    public static void MapPlayerManagementEndpoints(this IEndpointRouteBuilder app)
     {
         var group = app.MapGroup("api/player");
         
-        group.MapPost("Registration", RegisterUser).WithName(nameof(RegisterUser));
-        group.MapPost("Deactivate", DecommissionUser).WithName(nameof(DecommissionUser));
+        group.MapPost("registration", RegisterUser).WithName(nameof(RegisterUser));
+        group.MapPost("deactivate", DecommissionUser).WithName(nameof(DecommissionUser));
     }
 
     private static IResult RegisterUser(RegistrationService registrationService,  ILogger logger, object payload)
